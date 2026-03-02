@@ -84,9 +84,9 @@ export default function LoginPage() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <h1>🧮 Math Adventure!</h1>
+        <h1>🧮 הרפתקה מתמטית!</h1>
         <p className="login-subtitle">
-          {mode === 'login' ? 'Log in to continue your adventure' : 'Create a new account'}
+          {mode === 'login' ? 'התחבר כדי להמשיך בהרפתקה' : 'צור חשבון חדש'}
         </p>
 
         <div className="login-tabs">
@@ -94,37 +94,37 @@ export default function LoginPage() {
             className={`login-tab ${mode === 'login' ? 'active' : ''}`}
             onClick={() => { setMode('login'); setError(''); }}
           >
-            Log In
+            התחברות
           </button>
           <button
             className={`login-tab ${mode === 'register' ? 'active' : ''}`}
             onClick={() => { setMode('register'); setError(''); }}
           >
-            Sign Up
+            הרשמה
           </button>
         </div>
 
         {error && <div className="login-error">{error}</div>}
 
         <div className="login-field">
-          <label>Username</label>
+          <label>שם משתמש</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter username..."
+            placeholder="הכנס שם משתמש..."
             className="login-input"
             autoFocus
           />
         </div>
 
         <div className="login-field">
-          <label>Password</label>
+          <label>סיסמה</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter password..."
+            placeholder="הכנס סיסמה..."
             className="login-input"
             onKeyDown={(e) => { if (e.key === 'Enter' && mode === 'login') handleLogin(); }}
           />
@@ -133,37 +133,37 @@ export default function LoginPage() {
         {mode === 'register' && (
           <>
             <div className="login-field">
-              <label>Name</label>
+              <label>שם</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Your name..."
+                placeholder="השם שלך..."
                 className="login-input"
               />
             </div>
 
             <div className="login-field">
-              <label>I am a...</label>
+              <label>אני...</label>
               <div className="role-select">
                 <button
                   className={`role-btn ${role === 'kid' ? 'active' : ''}`}
                   onClick={() => setRole('kid')}
                 >
-                  🎒 Kid
+                  🎒 ילד/ה
                 </button>
                 <button
                   className={`role-btn ${role === 'parent' ? 'active' : ''}`}
                   onClick={() => setRole('parent')}
                 >
-                  👨‍👩‍👧 Parent
+                  👨‍👩‍👧 הורה
                 </button>
               </div>
             </div>
 
             {role === 'kid' && (
               <div className="login-field">
-                <label>Choose your character:</label>
+                <label>בחר דמות:</label>
                 <CharacterAvatar
                   avatarId={avatarId}
                   selectable
@@ -179,7 +179,7 @@ export default function LoginPage() {
           onClick={mode === 'login' ? handleLogin : handleRegister}
           disabled={loading || !username.trim() || !password || (mode === 'register' && !name.trim())}
         >
-          {loading ? '...' : mode === 'login' ? 'Log In' : 'Create Account'}
+          {loading ? '...' : mode === 'login' ? 'התחבר' : 'צור חשבון'}
         </button>
       </div>
     </div>

@@ -24,7 +24,7 @@ function KidManager() {
       const data = await api.listKids();
       setKids(data);
     } catch {
-      setError('Failed to load kids');
+      setError('שגיאה בטעינת ילדים');
     } finally {
       setLoading(false);
     }
@@ -48,18 +48,18 @@ function KidManager() {
       setShowForm(false);
       loadKids();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create kid');
+      setError(err instanceof Error ? err.message : 'שגיאה ביצירת חשבון');
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>טוען...</p>;
 
   return (
     <div>
       <div className="kids-header">
-        <h3>Kids ({kids.length})</h3>
+        <h3>ילדים ({kids.length})</h3>
         <button className="add-kid-btn" onClick={() => setShowForm(!showForm)}>
-          {showForm ? 'Cancel' : '+ Add Kid'}
+          {showForm ? 'ביטול' : '+ הוסף ילד/ה'}
         </button>
       </div>
 
@@ -71,25 +71,25 @@ function KidManager() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Kid's name"
+            placeholder="שם הילד/ה"
             className="login-input"
           />
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username for login"
+            placeholder="שם משתמש להתחברות"
             className="login-input"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder="סיסמה"
             className="login-input"
           />
           <button className="pin-submit" onClick={handleCreate}>
-            Create Account
+            צור חשבון
           </button>
         </div>
       )}
@@ -112,15 +112,15 @@ function KidManager() {
                 <span className="kid-username">@{kid.username}</span>
               </div>
               <div className="kid-card-stats">
-                <span>Level {level}</span>
+                <span>רמה {level}</span>
                 <span>{totalXp} XP</span>
-                <span>{completedStages.length} stages</span>
-                <span>{totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0}% accuracy</span>
+                <span>{completedStages.length} שלבים</span>
+                <span>{totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0}% דיוק</span>
               </div>
             </div>
           );
         })}
-        {kids.length === 0 && <p>No kids yet. Create an account for your child above.</p>}
+        {kids.length === 0 && <p>אין ילדים עדיין. צור חשבון לילד/ה למעלה.</p>}
       </div>
     </div>
   );
@@ -137,15 +137,15 @@ function KidDashboard() {
     return (
       <div className="parent-page">
         <div className="pin-form">
-          <h2>Parent Dashboard</h2>
-          <p>Enter access code (default: 1234)</p>
+          <h2>🔒 דשבורד הורה</h2>
+          <p>הכנס קוד גישה (ברירת מחדל: 1234)</p>
           <input
             type="password"
             inputMode="numeric"
             maxLength={6}
             value={pin}
             onChange={(e) => setPin(e.target.value)}
-            placeholder="PIN code"
+            placeholder="קוד PIN"
             className="pin-input"
           />
           <button
@@ -155,14 +155,14 @@ function KidDashboard() {
               else setPin('');
             }}
           >
-            Enter
+            כניסה
           </button>
         </div>
       </div>
     );
   }
 
-  if (!player) return <p>No player data</p>;
+  if (!player) return <p>אין נתוני שחקן</p>;
 
   const totalDays = progress.history.reduce((days, log) => {
     days.add(log.date);
@@ -182,44 +182,44 @@ function KidDashboard() {
 
   return (
     <div className="parent-page">
-      <h2>Parent Dashboard</h2>
+      <h2>📊 דשבורד הורה</h2>
 
       <div className="parent-overview">
         <div className="parent-stat">
           <div className="parent-stat-value">{totalDays}</div>
-          <div className="parent-stat-label">Practice days</div>
+          <div className="parent-stat-label">ימי תרגול</div>
         </div>
         <div className="parent-stat">
           <div className="parent-stat-value">{totalAnswered}</div>
-          <div className="parent-stat-label">Total questions</div>
+          <div className="parent-stat-label">שאלות סה"כ</div>
         </div>
         <div className="parent-stat">
           <div className="parent-stat-value">{formatPercent(totalAnswered > 0 ? totalCorrect / totalAnswered : 0)}</div>
-          <div className="parent-stat-label">Accuracy</div>
+          <div className="parent-stat-label">דיוק כללי</div>
         </div>
         <div className="parent-stat">
           <div className="parent-stat-value">{Math.round(totalTime / 60)}</div>
-          <div className="parent-stat-label">Total minutes</div>
+          <div className="parent-stat-label">דקות סה"כ</div>
         </div>
         <div className="parent-stat">
           <div className="parent-stat-value">{progress.completedStages.length}</div>
-          <div className="parent-stat-label">Stages completed</div>
+          <div className="parent-stat-label">שלבים הושלמו</div>
         </div>
         <div className="parent-stat">
           <div className="parent-stat-value">{player.streak}</div>
-          <div className="parent-stat-label">Current streak</div>
+          <div className="parent-stat-label">רצף נוכחי</div>
         </div>
       </div>
 
-      <h3>Topic Mastery</h3>
+      <h3>שליטה בנושאים</h3>
       <table className="parent-table">
         <thead>
           <tr>
-            <th>Topic</th>
-            <th>Grade</th>
-            <th>Questions</th>
-            <th>Accuracy</th>
-            <th>Difficulty</th>
+            <th>נושא</th>
+            <th>כיתה</th>
+            <th>שאלות</th>
+            <th>דיוק</th>
+            <th>רמת קושי</th>
           </tr>
         </thead>
         <tbody>
@@ -240,15 +240,15 @@ function KidDashboard() {
         </tbody>
       </table>
 
-      <h3>Last 14 Days Activity</h3>
+      <h3>פעילות ב-14 ימים אחרונים</h3>
       <div className="activity-log">
-        {last14.length === 0 && <p>No activity</p>}
+        {last14.length === 0 && <p>אין פעילות</p>}
         {last14.reverse().map((log, i) => (
           <div key={i} className="activity-entry">
             <span className="activity-date">{log.date}</span>
-            <span>{log.questionsAnswered} questions</span>
-            <span>{log.correctAnswers} correct</span>
-            <span>{Math.round(log.timeSpentSeconds / 60)} min</span>
+            <span>{log.questionsAnswered} שאלות</span>
+            <span>{log.correctAnswers} נכונות</span>
+            <span>{Math.round(log.timeSpentSeconds / 60)} דקות</span>
           </div>
         ))}
       </div>
@@ -263,7 +263,7 @@ export default function ParentPage() {
   if (authUser?.role === 'parent') {
     return (
       <div className="parent-page">
-        <h2>Parent Dashboard</h2>
+        <h2>📊 דשבורד הורה</h2>
         <KidManager />
       </div>
     );

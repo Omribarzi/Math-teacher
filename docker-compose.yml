@@ -1,0 +1,14 @@
+services:
+  math-teacher:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - JWT_SECRET=${JWT_SECRET:-change-this-to-a-random-string}
+      - PORT=3001
+    volumes:
+      - math-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  math-data:

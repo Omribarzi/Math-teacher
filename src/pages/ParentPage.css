@@ -139,3 +139,70 @@
   color: #2196F3;
   direction: ltr;
 }
+
+/* Kid management */
+.kids-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.add-kid-btn {
+  padding: 0.5rem 1.2rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.add-kid-btn:hover {
+  background: #45a049;
+}
+
+.add-kid-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 14px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.kids-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.kid-card {
+  background: white;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.kid-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.kid-username {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.kid-card-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}

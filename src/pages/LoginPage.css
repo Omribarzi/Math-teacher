@@ -1,0 +1,142 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+.login-card {
+  background: white;
+  border-radius: 28px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 100%;
+}
+
+.login-card h1 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0 0 0.5rem;
+}
+
+.login-subtitle {
+  color: #888;
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+}
+
+.login-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #667eea;
+}
+
+.login-tab {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  background: white;
+  color: #667eea;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-tab.active {
+  background: #667eea;
+  color: white;
+}
+
+.login-error {
+  background: #fee;
+  color: #c33;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-field {
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.login-field label {
+  display: block;
+  font-weight: 700;
+  color: #555;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.login-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-size: 1.1rem;
+  border: 3px solid #E0E0E0;
+  border-radius: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.login-input:focus {
+  border-color: #667eea;
+}
+
+.role-select {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.role-btn {
+  flex: 1;
+  padding: 0.7rem;
+  border: 3px solid #E0E0E0;
+  border-radius: 14px;
+  background: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.role-btn.active {
+  border-color: #667eea;
+  background: #f0f2ff;
+  color: #667eea;
+}
+
+.login-submit {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.login-submit:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.login-submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

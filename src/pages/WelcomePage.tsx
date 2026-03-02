@@ -1,16 +1,31 @@
 import { useState } from 'react';
 import { usePlayerStore } from '../store/usePlayerStore';
+import { useProgressStore } from '../store/useProgressStore';
+import { useSettingsStore } from '../store/useSettingsStore';
+import { useAuthStore } from '../store/useAuthStore';
+import * as api from '../lib/api';
 import CharacterAvatar from '../components/Adventure/CharacterAvatar';
 import './WelcomePage.css';
 
 export default function WelcomePage() {
-  const [name, setName] = useState('');
-  const [avatarId, setAvatarId] = useState('wizard');
+  const authUser = useAuthStore((s) => s.user);
+  const [name, setName] = useState(authUser?.name || '');
+  const [avatarId, setAvatarId] = useState(authUser?.avatarId || 'wizard');
   const createPlayer = usePlayerStore((s) => s.createPlayer);
 
   const handleStart = () => {
     if (!name.trim()) return;
     createPlayer(name.trim(), avatarId);
+
+    // Sync to server
+    const player = usePlayerStore.getState().player;
+    const progress = useProgressStore.getState().progress;
+    const settings = useSettingsStore.getState().settings;
+    api.saveState({
+      player: player as unknown as Record<string, unknown>,
+      progress: progress as unknown as Record<string, unknown>,
+      settings: settings as unknown as Record<string, unknown>,
+    }).catch(() => { /* will sync later */ });
   };
 
   return (

@@ -1,0 +1,85 @@
+.world-map {
+  padding: 1rem;
+}
+
+.world-map-title {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.world-map-path {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.world-node {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 3px solid #E0E0E0;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  position: relative;
+}
+
+.world-node.unlocked {
+  border-color: var(--world-color);
+}
+
+.world-node.unlocked:hover {
+  transform: translateX(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.world-node.current {
+  box-shadow: 0 0 0 3px var(--world-color), 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.world-node.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.world-emoji {
+  font-size: 2.5rem;
+}
+
+.world-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  flex: 1;
+  text-align: right;
+}
+
+.world-grade {
+  font-size: 0.85rem;
+  color: #888;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.8rem;
+}
+
+.world-progress {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--world-color);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+}
+
+.world-locked {
+  font-size: 0.85rem;
+  color: #999;
+}

@@ -1,0 +1,53 @@
+.timer-challenge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  background: #E3F2FD;
+  border-radius: 12px;
+}
+
+.timer-urgent {
+  background: #FFEBEE;
+  animation: urgentPulse 1s infinite;
+}
+
+@keyframes urgentPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.timer-icon {
+  font-size: 1.2rem;
+}
+
+.timer-bar-bg {
+  flex: 1;
+  height: 8px;
+  background: #BBDEFB;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.timer-bar-fill {
+  height: 100%;
+  background: #2196F3;
+  border-radius: 4px;
+  transition: width 1s linear;
+}
+
+.timer-urgent .timer-bar-bg {
+  background: #FFCDD2;
+}
+
+.timer-urgent .timer-bar-fill {
+  background: #f44336;
+}
+
+.timer-text {
+  font-weight: 700;
+  font-size: 1rem;
+  min-width: 45px;
+  direction: ltr;
+  text-align: left;
+}

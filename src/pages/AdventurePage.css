@@ -1,0 +1,51 @@
+.adventure-page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #2196F3;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.world-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.world-header-emoji {
+  font-size: 3rem;
+}
+
+.world-header h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.5rem;
+}
+
+.world-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.stages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}

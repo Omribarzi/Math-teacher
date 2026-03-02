@@ -1,0 +1,65 @@
+.stage-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 14px;
+  border: 2px solid #E0E0E0;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: right;
+  font-family: inherit;
+}
+
+.stage-card.accessible:hover {
+  border-color: var(--stage-color);
+  transform: translateX(-3px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.stage-card.completed {
+  border-color: #4CAF50;
+  background: #F1F8E9;
+}
+
+.stage-card.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stage-number {
+  font-size: 1.4rem;
+  font-weight: 800;
+  min-width: 40px;
+  text-align: center;
+  color: var(--stage-color);
+}
+
+.stage-info {
+  flex: 1;
+}
+
+.stage-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #333;
+}
+
+.stage-desc {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+.stage-meta {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 0.3rem;
+}
+
+.stage-timer {
+  color: #FF9800;
+  font-weight: 600;
+}

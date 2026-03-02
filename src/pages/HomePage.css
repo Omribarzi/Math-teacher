@@ -1,0 +1,135 @@
+.home-page {
+  text-align: center;
+}
+
+.home-hero {
+  margin-bottom: 2rem;
+}
+
+.home-hero h1 {
+  font-size: 2rem;
+  margin-top: 0.5rem;
+  color: #333;
+}
+
+.home-subtitle {
+  color: #888;
+  font-size: 1rem;
+}
+
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2196F3;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.3rem;
+}
+
+.home-continue {
+  margin-bottom: 2rem;
+}
+
+.home-continue h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 0.8rem;
+}
+
+.continue-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.continue-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.continue-emoji {
+  font-size: 2rem;
+}
+
+.continue-info {
+  flex: 1;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.continue-world {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.continue-stage {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.continue-arrow {
+  font-size: 1.5rem;
+}
+
+.home-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.action-btn {
+  padding: 1.2rem;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  color: white;
+}
+
+.action-adventure {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+}
+
+.action-challenge {
+  background: linear-gradient(135deg, #FF9800, #FFB74D);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 600px) {
+  .home-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

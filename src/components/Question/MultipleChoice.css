@@ -1,0 +1,44 @@
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.mc-option {
+  padding: 1rem 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: 3px solid #E0E0E0;
+  border-radius: 14px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.mc-option:hover:not(:disabled) {
+  border-color: #2196F3;
+  background: #E3F2FD;
+  transform: translateY(-2px);
+}
+
+.mc-option:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.mc-option:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.mc-option.mc-correct {
+  border-color: #4CAF50;
+  background: #E8F5E9;
+  opacity: 1 !important;
+}
+
+@media (max-width: 480px) {
+  .mc-options {
+    grid-template-columns: 1fr;
+  }
+}

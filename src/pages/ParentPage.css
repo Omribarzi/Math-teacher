@@ -1,0 +1,141 @@
+.parent-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.parent-page h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.parent-page h3 {
+  margin: 1.5rem 0 0.8rem;
+  color: #333;
+}
+
+/* PIN form */
+.pin-form {
+  text-align: center;
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 350px;
+  margin: 2rem auto;
+}
+
+.pin-form h2 {
+  margin-bottom: 0.5rem;
+}
+
+.pin-form p {
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.pin-input {
+  font-size: 1.5rem;
+  padding: 0.8rem;
+  border: 3px solid #E0E0E0;
+  border-radius: 12px;
+  width: 120px;
+  text-align: center;
+  font-family: inherit;
+  letter-spacing: 4px;
+  outline: none;
+}
+
+.pin-input:focus {
+  border-color: #2196F3;
+}
+
+.pin-submit {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Overview stats */
+.parent-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+
+.parent-stat {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.parent-stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2196F3;
+}
+
+.parent-stat-label {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Table */
+.parent-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.parent-table th,
+.parent-table td {
+  padding: 0.7rem 1rem;
+  text-align: right;
+}
+
+.parent-table th {
+  background: #F5F5F5;
+  font-weight: 700;
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.parent-table td {
+  border-top: 1px solid #F0F0F0;
+  font-size: 0.9rem;
+}
+
+/* Activity log */
+.activity-log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.activity-entry {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.6rem 1rem;
+  background: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.activity-date {
+  font-weight: 600;
+  color: #2196F3;
+  direction: ltr;
+}

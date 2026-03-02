@@ -1,0 +1,144 @@
+.profile-page {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-header h1 {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.profile-header p {
+  color: #888;
+  margin: 0 0 0.8rem;
+}
+
+.profile-stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-section h2 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Achievements */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.8rem;
+}
+
+.achievement-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s;
+}
+
+.achievement-card.locked {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+.achievement-card.unlocked {
+  border: 2px solid #FFD54F;
+}
+
+.achievement-card .achievement-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.achievement-card .achievement-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #333;
+  display: block;
+}
+
+.achievement-card .achievement-desc {
+  font-size: 0.7rem;
+  color: #888;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+/* Mastery */
+.mastery-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.mastery-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: white;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.mastery-info {
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mastery-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.mastery-grade {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.mastery-bar-bg {
+  flex: 1;
+  height: 10px;
+  background: #E0E0E0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.mastery-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+.mastery-pct {
+  min-width: 40px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.empty-text {
+  text-align: center;
+  color: #999;
+}

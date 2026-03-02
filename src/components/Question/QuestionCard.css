@@ -1,0 +1,86 @@
+.question-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.question-card.correct {
+  animation: correctPulse 0.5s ease;
+  border: 3px solid #4CAF50;
+}
+
+.question-card.wrong {
+  animation: shake 0.5s ease;
+  border: 3px solid #f44336;
+}
+
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.question-progress {
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.question-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.question-hint {
+  background: #FFF3E0;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #E65100;
+  font-size: 1rem;
+}
+
+.question-input {
+  margin-top: 1rem;
+}
+
+.question-feedback {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  animation: fadeIn 0.3s ease;
+}
+
+.feedback-correct {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.feedback-wrong {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

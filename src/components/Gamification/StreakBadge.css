@@ -1,0 +1,33 @@
+.streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #FFF3E0;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+}
+
+.streak-hot {
+  background: #FFCCBC;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 87, 34, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(255, 87, 34, 0.5); }
+}
+
+.streak-icon {
+  font-size: 1.2rem;
+}
+
+.streak-count {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #E65100;
+}
+
+.streak-label {
+  font-size: 0.7rem;
+  color: #BF360C;
+}

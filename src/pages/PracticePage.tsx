@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import QuestionCard from '../components/Question/QuestionCard';
 import TimerChallenge from '../components/Gamification/TimerChallenge';
@@ -7,10 +7,13 @@ import { getStageById } from '../data/worlds';
 import { getTopicById } from '../data/curriculum';
 import { usePlayerStore } from '../store/usePlayerStore';
 import { useProgressStore } from '../store/useProgressStore';
+import { useSettingsStore } from '../store/useSettingsStore';
+import { useAuthStore } from '../store/useAuthStore';
 import { shouldShowHint } from '../engine/adaptiveDifficulty';
 import { shouldReview, generateReviewQuestion } from '../engine/spacedRepetition';
 import { toMultipleChoice, toTrueFalse, randomQuestionType } from '../engine/questionGenerator';
 import { xpForCorrectAnswer, xpForStageComplete } from '../utils/xp';
+import * as api from '../lib/api';
 import type { Question, AnswerResult } from '../types';
 import './PracticePage.css';
 
@@ -27,6 +30,7 @@ export default function PracticePage() {
   const [correctCount, setCorrectCount] = useState(0);
   const [_answers, setAnswers] = useState<AnswerResult[]>([]);
   const [isComplete, setIsComplete] = useState(false);
+  const [stagePassed, setStagePassed] = useState(false);
   const [newAchievements, setNewAchievements] = useState<string[]>([]);
   const [startTime] = useState(Date.now());
   const [timerActive, setTimerActive] = useState(false);
@@ -34,6 +38,10 @@ export default function PracticePage() {
   const stageData = stageId ? getStageById(stageId) : undefined;
   const stage = stageData?.stage;
   const world = stageData?.world;
+
+  // Use refs for values needed in callbacks to avoid stale closures
+  const correctCountRef = useRef(correctCount);
+  correctCountRef.current = correctCount;
 
   // Generate questions for the stage
   useEffect(() => {
@@ -78,23 +86,19 @@ export default function PracticePage() {
     }
   }, [stage?.id]);
 
-  const handleAnswer = useCallback((result: AnswerResult) => {
-    setAnswers((a) => [...a, result]);
-    recordAnswer(result.question.topic, result.correct);
-
-    if (result.correct) {
-      setCorrectCount((c) => c + 1);
-      const xp = xpForCorrectAnswer(result.timeMs, player?.streak ?? 0);
-      addXp(xp);
-    }
-
-    if (currentIndex + 1 >= questions.length) {
-      // Stage complete
-      finishStage(correctCount + (result.correct ? 1 : 0));
-    } else {
-      setCurrentIndex((i) => i + 1);
-    }
-  }, [currentIndex, questions.length, correctCount, player?.streak]);
+  // Immediately sync state to server (don't rely only on debounced sync)
+  const syncToServer = useCallback(() => {
+    const token = useAuthStore.getState().token;
+    if (!token) return;
+    const p = usePlayerStore.getState().player;
+    const pr = useProgressStore.getState().progress;
+    const s = useSettingsStore.getState().settings;
+    api.saveState({
+      player: p as unknown as Record<string, unknown>,
+      progress: pr as unknown as Record<string, unknown>,
+      settings: s as unknown as Record<string, unknown>,
+    }).catch(() => {});
+  }, []);
 
   const finishStage = useCallback((finalCorrect: number) => {
     setTimerActive(false);
@@ -104,6 +108,8 @@ export default function PracticePage() {
 
     const passed = stage ? finalCorrect >= stage.requiredCorrect : false;
     const ratio = questions.length > 0 ? finalCorrect / questions.length : 0;
+
+    setStagePassed(passed);
 
     if (passed && stageId) {
       completeStage(stageId);
@@ -119,11 +125,32 @@ export default function PracticePage() {
       xpEarned: 0,
       timeSpentSeconds: Math.round((Date.now() - startTime) / 1000),
     });
-  }, [stage, stageId, questions.length, startTime]);
+
+    // Immediately sync to server so progress isn't lost
+    syncToServer();
+  }, [stage, stageId, questions.length, startTime, updateStreak, completeStage, addXp, addSessionLog, syncToServer]);
+
+  const handleAnswer = useCallback((result: AnswerResult) => {
+    setAnswers((a) => [...a, result]);
+    recordAnswer(result.question.topic, result.correct);
+
+    if (result.correct) {
+      setCorrectCount((c) => c + 1);
+      const xp = xpForCorrectAnswer(result.timeMs, player?.streak ?? 0);
+      addXp(xp);
+    }
+
+    if (currentIndex + 1 >= questions.length) {
+      // Stage complete
+      finishStage(correctCountRef.current + (result.correct ? 1 : 0));
+    } else {
+      setCurrentIndex((i) => i + 1);
+    }
+  }, [currentIndex, questions.length, player?.streak, finishStage, recordAnswer, addXp]);
 
   const handleTimeUp = useCallback(() => {
-    finishStage(correctCount);
-  }, [correctCount, finishStage]);
+    finishStage(correctCountRef.current);
+  }, [finishStage]);
 
   if (!stage || !world) {
     return (
@@ -135,7 +162,6 @@ export default function PracticePage() {
   }
 
   if (isComplete) {
-    const passed = correctCount >= stage.requiredCorrect;
     const ratio = questions.length > 0 ? correctCount / questions.length : 0;
 
     return (
@@ -147,18 +173,18 @@ export default function PracticePage() {
           />
         )}
         <div className="stage-result" style={{ borderColor: world.color }}>
-          <div className="result-emoji">{passed ? '🎉' : '💪'}</div>
-          <h2>{passed ? 'כל הכבוד!' : 'נסה שוב!'}</h2>
+          <div className="result-emoji">{stagePassed ? '🎉' : '💪'}</div>
+          <h2>{stagePassed ? 'כל הכבוד!' : 'נסה שוב!'}</h2>
           <p className="result-score">
             {correctCount} מתוך {questions.length} נכונות ({Math.round(ratio * 100)}%)
           </p>
           <p className="result-required">
-            {passed
-              ? `עברת! (צריך ${stage.requiredCorrect})`
+            {stagePassed
+              ? `עברת! השלב הבא נפתח! (צריך ${stage.requiredCorrect})`
               : `צריך לפחות ${stage.requiredCorrect} נכונות כדי לעבור`}
           </p>
           <div className="result-actions">
-            {!passed && (
+            {!stagePassed && (
               <button
                 className="result-btn retry"
                 onClick={() => {
@@ -166,6 +192,7 @@ export default function PracticePage() {
                   setCorrectCount(0);
                   setAnswers([]);
                   setIsComplete(false);
+                  setStagePassed(false);
                   setQuestions([]);
                   // Re-trigger question generation
                   setTimeout(() => window.location.reload(), 0);

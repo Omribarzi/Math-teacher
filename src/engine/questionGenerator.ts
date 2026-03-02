@@ -81,14 +81,17 @@ export function randomQuestionType(): QuestionType {
 /** Create a true/false variant from a fill-blank question */
 export function toTrueFalse(q: Question): Question {
   const correct = Number(q.correctAnswer);
-  const showCorrect = Math.random() > 0.5;
+  // ~35% true, ~65% false — ensures a good mix and avoids "always נכון" feel
+  const showCorrect = Math.random() < 0.35;
 
   let displayAnswer: number;
   if (showCorrect) {
     displayAnswer = correct;
   } else {
-    const offset = randomPick([-2, -1, 1, 2, 3]);
+    const offset = randomPick([-3, -2, -1, 1, 2, 3]);
     displayAnswer = correct + offset;
+    // Avoid negative display answers for young kids
+    if (displayAnswer < 0) displayAnswer = correct + Math.abs(offset);
   }
 
   const isTrue = displayAnswer === correct;
